@@ -25,4 +25,13 @@ text = F.read()
 
 print(text)
 
+#File content is always a string so, we can manipulate it using build-in-functions for strings.
+print(text.split())
+
+F.close()
+
+#Files provide an iterator that automatically reads line by line in for loops or other contexts
+for line in open("test.txt"):
+    print(line)
+
 F.close()
