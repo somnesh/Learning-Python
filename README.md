@@ -16,7 +16,7 @@ When the Python package is installed on your machine, it generates a number of c
 
 When you instruct Python to run your script, there are a few steps that Python carries out before your code actually starts crunching away. Specifically, it's first compiled to something called "Byte-code" and then routed to something called a "virtual machine".
 
-### <ins>Byte code compilation</ins>
+### Byte code compilation
 
 Internally, and almost completely hidden from you, when you execute a program Python first compiles your *source code* into a format known as *byte code*. Compilation is simply a translation step, and byte code is lower level, platform-independent representation of your source code. Roughly, Python translates each of your source statements into a group of byte code instructions by decomposing them into individual steps. This byte code translation is performed to speed execution - byte code can be run much more quickly than the original source code statements in your text file.
 
