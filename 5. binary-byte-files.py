@@ -31,19 +31,20 @@ The 'b' infront of 'spam' indicates it is an bytes literal not a sequence of Uni
 print(packed)
 
 
-#Output: b'\x00\x00\x00\x07spam\x00\x08'
+'''Output: b'\x00\x00\x00\x07spam\x00\x08'
 
-#Let's break down the output:
+Let's break down the output:
 
-#First, each '\x' represents a hexadecimal escape sequence.
+First, each '\\x' (ignore the extra backslash '\', it's used for escape otherwise it will generate an unicode error)
+represents a hexadecimal escape sequence.
 
-#'\x00\x00\x00\x07' corresponds to a 32-bit integer with the hexadecimal value '0x00000007', i.e. the number 7
+'\x00\x00\x00\x07' corresponds to a 32-bit integer with the hexadecimal value '0x00000007', i.e. the number 7
 
-#'spam' is the 4-byte string
+'spam' is the 4-byte string
 
-#'\x00\x08' corresponds to a 16-bit short integer with a hexadecimal value '0x0008', which is the number 8
+'\x00\x08' corresponds to a 16-bit short integer with a hexadecimal value '0x0008', which is the number 8
 
-
+'''
 file = open('test.bin','wb') #'wb' : write binary
 print(file.write(packed)) #output: 10 (10-bytes of data has been written)
 file.close()
