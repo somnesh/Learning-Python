@@ -457,7 +457,7 @@ for item in set('abc'):
 # ccc
 ```  
 
-Note that {} is still a dictionary in all Pythons. Empty sets must be created with the
+Note that `{}` is still a dictionary in all Pythons. Empty sets must be created with the
 set built-in, and print the same way:
 
 ```py
