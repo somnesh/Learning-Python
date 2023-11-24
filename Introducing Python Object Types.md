@@ -579,11 +579,27 @@ Let's break down the __format string__:
 3. '`4s`' : This indicates a 4-byte or 32-bit string.
 4. '`h`' : This indicates a 2-byte or 16-bit short integer.  
 
-The '`b`' infront of 'spam' indicates it is an bytes literal not a sequence of Unicode characters.  
+>The '`b`' infront of 'spam' indicates it is an bytes literal not a sequence of Unicode characters.  
 
 Let's break down the __output__:
 
 1. First, each '`\x`' represents a hexadecimal escape sequence.
 2. '`\x00\x00\x00\x07`' corresponds to a 32-bit integer with the hexadecimal value '`0x00000007`', i.e. the number 7.
 3. '`spam`' is the 4-byte string.
-4. '`\x00\x08`' corresponds to a 16-bit short integer with a hexadecimal value '`0x0008`', which is the number 8.
+4. '`\x00\x08`' corresponds to a 16-bit short integer with a hexadecimal value '`0x0008`', which is the number 8.  
+
+Now, we can write the packed binary data into a file.
+```py
+file = open('test.bin','wb') #'wb' : write binary
+print(file.write(packed)) #output: 10 (10-bytes of data has been written)
+file.close()
+```  
+Reading binary data back is essentially symmetric; not all programs need to tread so deeply into the low-level realm of bytes, but binary files make this easy in Python:
+
+```py
+data = open('test.bin','rb').read() #'rb' : read binary
+print(data) # Output: b'\x00\x00\x00\x07spam\x00\x08'
+
+#Unpacking into objects again
+print(struct.unpack('>i4sh', data)) # Output: (7, b'spam', 8)
+```
