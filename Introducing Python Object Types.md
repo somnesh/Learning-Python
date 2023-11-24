@@ -16,8 +16,9 @@ Python’s built-in object types and some of the syntax used to code their liter
 | Files | `open('eggs.txt')`, `open(r'C:\ham.bin', 'wb')` |
 | Sets | `set('abc')`, `{'a', 'b', 'c'}` |
 | Other core types | `Booleans`, `types`, `None` |
-| Program unit types[^bignote] | `Functions`, `modules`, `classes` |
+| Program unit types | `Functions`, `modules`, `classes` |
 | Implementation-related types | `Compiled code`, `stack tracebacks` |
 
-[^bignote]: *Program units* such as functions, modules, and classes — are objects in Python too; they are created with statements and expressions such as `def`, `class`, `import`, and `lambda` and may be passed around scripts freely, stored within other objects, and so on.  
-
+>*Program units* such as functions, modules, and classes — are objects in Python too; they are created with statements and expressions such as `def`, `class`, `import`, and `lambda` and may be passed around scripts freely, stored within other objects, and so on.  
+>
+>Python also provides a set of *implementation-related types* such as compiled code objects, which are generally of interest to tool builders more than application developers; we’ll explore these in later parts too, though in less depth due to their specialized roles.
