@@ -157,4 +157,4 @@ new_s = 'a' + s[1:] # But we can run expressions to make new objects
 print(new_s) # Output: 'aorld'
 ```  
 
-Every object in Python is classified as either immutable (unchangeable) or not. In terms of the core types, numbers, strings, and tuples are immutable; lists, dictionaries, and sets are not — they can be changed in place freely.
+Every object in Python is classified as either immutable (unchangeable) or not. In terms of the core types, `numbers`, `strings`, and `tuples` are `immutable`; `lists`, `dictionaries`, and `sets` are not — they can be changed in place freely.
