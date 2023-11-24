@@ -571,7 +571,7 @@ packed = struct.pack('>i4sh', 7, b'spam', 8)
 print(packed) # Output: b'\x00\x00\x00\x07spam\x00\x08'
 ```  
 
-In the above code here, '`>i4sh`' is a ***format string*** and the values we are trying to pack into it.
+In the above code here, '`>i4sh`' is a ***format string*** and the values we are trying to pack into it.  
 Let's break down the __format string__:  
 
 1. '`>`' : This indicates that the data should be packed in big-endian (Most significant byte first) order.
@@ -583,10 +583,7 @@ The '`b`' infront of 'spam' indicates it is an bytes literal not a sequence of U
 
 Let's break down the __output__:
 
-First, each '`\x`' represents a hexadecimal escape sequence.
-
-'`\x00\x00\x00\x07`' corresponds to a 32-bit integer with the hexadecimal value '`0x00000007`', i.e. the number 7
-
-'`spam`' is the 4-byte string
-
-'`\x00\x08`' corresponds to a 16-bit short integer with a hexadecimal value '`0x0008`', which is the number 8
+1. First, each '`\x`' represents a hexadecimal escape sequence.
+2. '`\x00\x00\x00\x07`' corresponds to a 32-bit integer with the hexadecimal value '`0x00000007`', i.e. the number 7.
+3. '`spam`' is the 4-byte string.
+4. '`\x00\x08`' corresponds to a 16-bit short integer with a hexadecimal value '`0x0008`', which is the number 8.
