@@ -378,7 +378,7 @@ print({i: sum(M[i]) for i in range(3)}) # Output: {0: 6, 1: 15, 2: 24}
 
 ## Dictionaries
 
-Python dictionaries are something completely different — they are not sequences at all, but are instead known as mappings. Mappings are also collections of other objects, but they store objects by key instead of by relative position. In fact, mappings don’t maintain any reliable left-to-right order; they simply map keys to associated values. Dictionary are coded in curly braces and consist of a series of {key : value} pairs.  
+Python dictionaries are something completely different — they are not sequences at all, but are instead known as *mappings*. Mappings are also collections of other objects, but they store objects by key instead of by relative position. In fact, mappings don’t maintain any reliable left-to-right order; they simply map keys to associated values. Dictionary are coded in curly braces and consist of a series of `{key : value}` pairs.  
 
 Here are some way to crate a dictionary:
 
