@@ -379,3 +379,148 @@ Fraction objects can also be created from floating-point number strings.
 ```python
 print(Fraction('.25')) # Output: 1/4
 ```
+
+### Sets
+
+Python 2.4 introduced a new collection type, the `set` - an unorderd collection of unique and immutable objects that supports operations corresponding to mathemetical set theory.  
+
+Howerver, because sets are unorderd and do not map keys to values, they are neither sequence nor mapping types; they are a type category unto themselves.
+
+```python
+x = set('spam')
+print(x)
+
+y = {'i', 'm', 'k'}
+print(y)
+
+print(x,y) # Output: {'p', 'm', 'a', 's'} {'i', 'm', 'k'}
+
+#Intersection
+print(x & y) # Output: {'m'}
+
+#Union
+print(x | y) # Output: {'p', 's', 'a', 'k', 'i', 'm'}
+
+#Difference
+print(x - y) # Output: {'p', 'a', 's'}
+
+#Superset
+print(x > y) # Output: False
+
+#Subset
+print(x > y) # Output: False
+
+#Symmetric difference (XOR)
+print(x ^ y) # Output: {'a', 's', 'p', 'k', 'i'}
+
+#Set comprehensions:
+print({n ** 2 for n in [1, 2, 3, 4]}) # Output: {16, 1, 4, 9}
+
+#Filtering out duplicates:
+print(list(set([1, 2, 4, 2, 5, 6, 2, 1, 7, 3]))) # Output: [1, 2, 3, 4, 5, 6, 7]
+
+#Finding differences in collections:
+print(set('spam') - set('ham')) # Output: {'p', 's'}
+
+#Order-neutral equality tests:
+print(set('spam') == set('asmp')) # Output: True
+```
+
+In addition to expressions, the `set` object provides methods that corrospond to these operations and more and that support set changes.
+
+```python
+# Same as (x & y)
+z = x.intersection(y) # Output: {'m'}
+
+# Insert one item
+z.add('NEW')
+print(z) # Output: {'m', 'NEW'}
+
+# Merge: in place union
+z.update(set(['X', 'Y']))
+print(z) # Output: {'X', 'Y', 'm', 'NEW'}
+
+# Delete one item (by value)
+z.remove('Y')
+print(z) # Output: {'X', 'm', 'NEW'}
+```
+
+As *iterable* containers, sets can also be used in operations such as `len`, `for` loops, and list comprehensions. Because they are unorderd, though, they support sequence operations like indexing and slicing.
+
+```python
+for item in set('abc'):
+    print(item * 3)
+
+# Output: 
+# bbb
+# aaa
+# ccc
+```  
+
+Note that {} is still a dictionary in all Pythons. Empty sets must be created with the
+set built-in, and print the same way:
+
+```py
+s = {1, 2, 3, 4}
+
+# Empty sets print differently 
+print(s - {1, 2, 3, 4}) # Output: set()
+
+print(type({})) # Output: <class 'dict'>
+
+s1 = set() # initialize an empty set
+s1.add(1.23)
+
+print(s1) # Output: {1.23}
+```
+
+Sets has some methods, which allow general iterable operands that expressions do not:
+
+```py
+print({1, 2, 3} | {3, 4}) # Output: {1, 2, 3, 4}
+
+print({1, 2, 3} | [3, 4]) # TypeError: unsupported operand type(s) for |: 'set' and 'list'
+
+print({1, 2, 3}.union([3, 4])) # Output: {1, 2, 3, 4}
+
+print({1, 2, 3}.union({3, 4})) # Output: {1, 2, 3, 4}
+
+print({1, 2, 3}.union(set([3, 4]))) # Output: {1, 2, 3, 4}
+
+print({1, 2, 3}.intersection((1, 3, 5))) # Output: {1, 3}
+
+print({1, 2, 3}.issubset(range(-5, 5))) # Output: True
+```
+
+#### Immutable constraints and frozen sets
+
+Sets are powerful and flexible objects, but they do have one constraint that you should keep in mind—largely because of their implementation, sets can only contain *immutable* (a.k.a. “hashable”) object types. Hence, `lists` and `dictionaries` cannot be embedded in sets, but `tuples` can if you need to store compound values. Tuples compare by their full values when used in set operations:
+
+```py
+print(s1) # Output: {1.23}
+
+s1.add([1, 2, 3]) # Output: TypeError: unhashable type: 'list'
+
+s1.add({'a':1}) # Output: TypeError: unhashable type: 'dict'
+
+s1.add((1, 2, 3)) # No problem with tuple
+
+print(s1) # Output: {1.23, (1, 2, 3)}
+
+# Union: same as union(...)
+print(s1 | {(4, 5, 6), (1, 2, 3)}) # Output: {1.23, (1, 2, 3), (4, 5, 6)}
+
+print((1, 2, 3) in s1) # Output: True
+
+print((1, 4, 3) in s1) # Output: False
+
+```  
+
+#### Set comprehensions
+
+The set comprehension expression is similar in form to the list comprehension, but is coded in curly braces
+instead of square brackets and run to make a set instead of a list.
+
+```py
+print({x ** 2 for x in [1, 2, 3, 4]}) # Output: {x ** 2 for x in [1, 2, 3, 4]}
+```
