@@ -466,3 +466,127 @@ for key in sorted(test_dict):
 # b => 2
 # c => 3
 ```
+
+## Tuples
+
+The tuple object is roughly like a list that cannot be changed—tuples are *sequences*, like lists, but they are *immutable*, like strings. Functionally, they’re used to represent fixed collections of items: the components of a specific calendar date, for instance. Syntactically, they are normally coded in parentheses instead of square brackets, and they support arbitrary types, arbitrary nesting, and the usual sequence operations:
+
+```python
+T = (1, 2, 3, 4, 4)
+
+#Length
+print(len(T)) # Output: 5
+
+#Concatenation 
+print(T + (5, 6, 7)) # Output: (1, 2, 3, 4, 4, 5, 6, 7)
+print(T) # Output: (1, 2, 3, 4, 4)
+
+#Indexing, slicing, and more
+print(T[0]) # Output: 1
+```  
+
+Tuples also have type-specific callable methods, but not nearly as many as `lists`:
+
+```py
+print(T.index(4)) # Output: 3
+
+print(T.count(4)) # Output: 2 (Because 4 appears twice)
+```  
+
+The primary distinction for tuples is that they cannot be changed once created. That is, they are *immutable* sequences:
+
+```py
+T[0] = 2 # TypeError: 'tuple' object does not support item assignment
+
+# Make a new tuple for a new value
+T = (2,) + T[1:]
+
+print(T) # Output: (2, 2, 3, 4, 4)
+```  
+
+Like `lists` and `dictionaries`, `tuples` support mixed types and nesting, but they don’t grow and shrink because they are *immutable* (the parentheses enclosing a tuple’s items can usually be omitted, as done here):
+
+```py
+T = 'spam', 3.0, [11, 22, 33]
+
+print(T[1]) # Output: 3.0
+
+print(T[2][1]) # Output: 22
+```
+
+## Files
+
+File objects are Python code’s main interface to external files on your computer. Files are a core type, but they’re something of an oddball — there is no specific literal syntax for creating them. Rather, to create a file object, you call the built-in `open` function, passing in an external filename and an optional processing mode as strings.  
+
+For example, to create a text output file, you would pass in its `name` and the '`w`' processing mode string to write data:
+
+```py
+F = open("test.txt","w")
+
+print(F.write("Hello\n")) #output : 6 (Because it returns the number of items written)
+F.write("World")
+
+F.close() 
+```  
+This creates a file in the current directory and writes text to it (the filename can be a full directory path if you need to access a file elsewhere on your computer).  
+
+To read back what you just wrote, reopen the file in '`r`' processing mode, for reading text input — this is the default if you omit the mode in the call. Then read the file’s content into a string, and display it. A file’s contents are always a string in your script, regardless of the type of data the file contains:
+
+```py
+F = open("test.txt") #'r'(read) is the default processing mode
+text = F.read()
+print(text)
+# Output:
+# Hello
+# World
+
+#File content is always a string so, we can manipulate it using build-in-functions for strings.
+print(text.split()) # Output: ['Hello', 'World']
+
+F.close()
+```  
+
+As we’ll see later, though, the best way to read a file today is to *not read it at all* — files provide an *iterator* that automatically reads line by line in `for` loops and other contexts:
+
+```py
+for line in open("test.txt"):
+    print(line)
+
+# Output:
+# Hello
+#
+# World
+```  
+
+## Binary Byte Files
+
+Python 3.X draws a sharp distinction between *text* and *binary data* in files: text files represent content as normal `str` strings and perform *Unicode* encoding and decoding automatically when writing and reading data, while binary files represent content as a special `bytes` string and allow you to access file content unaltered.  
+
+To illustrate, Python’s `struct` module can both create and unpack packed *binary data* — raw bytes that record values that are not Python objects — to be written to a file in binary mode.  
+
+```py
+import struct
+packed = struct.pack('>i4sh', 7, b'spam', 8)
+
+print(packed) # Output: b'\x00\x00\x00\x07spam\x00\x08'
+```  
+
+In the above code here, '`>i4sh`' is a ***format string*** and the values we are trying to pack into it.
+Let's break down the __format string__:  
+
+1. '`>`' : This indicates that the data should be packed in big-endian (Most significant byte first) order.
+2. '`i`' : This indicates a 4-byte or 32-bit integer.
+3. '`4s`' : This indicates a 4-byte or 32-bit string.
+4. '`h`' : This indicates a 2-byte or 16-bit short integer.  
+
+The '`b`' infront of 'spam' indicates it is an bytes literal not a sequence of Unicode characters.  
+
+Let's break down the __output__:
+
+First, each '`\x`' represents a hexadecimal escape sequence.
+
+'`\x00\x00\x00\x07`' corresponds to a 32-bit integer with the hexadecimal value '`0x00000007`', i.e. the number 7
+
+'`spam`' is the 4-byte string
+
+'`\x00\x08`' corresponds to a 16-bit short integer with a hexadecimal value '`0x0008`', which is the number 8
