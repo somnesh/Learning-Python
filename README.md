@@ -22,7 +22,7 @@ Internally, and almost completely hidden from you, when you execute a program Py
 
 You'll notice that the prior paragraph said that this is *almost* completely hidden from you. If the Python process has write access on your machine, it will store the byte code of your programs in files that ends with a *.pyc* extension (".pyc" means compiled ".py" source).
 
-In 3.2 and later, Python saves it's *.pyc* byte code files in a sub-directory named \__*Pycache*__ located in the directory where your source files reside, and in files whose names identify by the Python version that crated them (e.g., *script.cpython-33.pyc*). The \__*Pycache*__ sub-directory helps to avoid clutter, and the naming convention for byte code files prevents different Python versions installed on the same computer from overwriting each other's saved byte codes.
+In 3.2 and later, Python saves it's *.pyc* byte code files in a sub-directory named \_\_*Pycache*__ located in the directory where your source files reside, and in files whose names identify by the Python version that crated them (e.g., *script.cpython-33.pyc*). The \_\_*Pycache*__ sub-directory helps to avoid clutter, and the naming convention for byte code files prevents different Python versions installed on the same computer from overwriting each other's saved byte codes.
 
 Python saves byte code like this is a startup speed optimization. The next time you run your program, Python will load the *.pyc* files and skip the compilation step, as long as you haven't changed your source code since the byte code since the byte code was last saved, and aren't running with a different Python than the one that created the byte code. It works like this:
 
